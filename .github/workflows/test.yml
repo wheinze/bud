@@ -19,10 +19,16 @@ jobs:
         include:
           - os: ubuntu-latest
             go: 1.18
-            node: [14, 16, 18]
+            node: 14
+          - os: ubuntu-latest
+            go: 1.18
+            node: 18
           - os: macos-latest
             go: 1.18
-            node: [14, 16, 18]
+            node: 14
+          - os: macos-latest
+            go: 1.18
+            node: 18
 
     steps:
       - name: Check out bud
