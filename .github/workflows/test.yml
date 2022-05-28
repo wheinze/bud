@@ -15,6 +15,14 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest]
         go: ['1.16', '1.17', '1.18']
+        node: ['16']
+        include:
+          - os: ubuntu-latest
+            go: 1.18
+            node: [14, 16, 18]
+          - os: macos-latest
+            go: 1.18
+            node: [14, 16, 18]
 
     steps:
       - name: Check out bud
@@ -27,9 +35,9 @@ jobs:
           go-version: ${{ matrix.go }}
 
       - name: Setup Node.js
-        uses: actions/setup-node@v1.4.4
+        uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: ${{ matrix.node }}
           cache: 'npm'
           cache-dependency-path: |
             livebud/package-lock.json
