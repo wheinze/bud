@@ -53,13 +53,13 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ${{ steps.go-cache-paths.outputs.go-build }}
-          key: ${{ runner.os }}-go-build-${{ hashFiles('**/go.sum') }}
+          key: ${{ runner.os }}-go-${{ matrix.go }}-build-${{ hashFiles('**/go.sum') }}
       # Cache go mod cache, used to speedup builds
       - name: Go Mod Cache
         uses: actions/cache@v2
         with:
           path: ${{ steps.go-cache-paths.outputs.go-mod }}
-          key: ${{ runner.os }}-go-mod-${{ hashFiles('**/go.sum') }}
+          key: ${{ runner.os }}-go-${{ matrix.go }}-mod-${{ hashFiles('**/go.sum') }}
 
       - name: Install Go modules
         run: go mod download
@@ -70,10 +70,10 @@ jobs:
           path: $TMPDIR/bud/snapshot
           key: ${{ runner.os }}
 
-      - name: Run CI (OSX)
+      - name: Run CI (macOS)
         if: matrix.os == 'macos-latest'
         run: make ci.macos
 
-      - name: Run CI (Ubuntu)
+      - name: Run CI (Linux - Ubuntu)
         if: matrix.os == 'ubuntu-latest'
         run: make ci.ubuntu
