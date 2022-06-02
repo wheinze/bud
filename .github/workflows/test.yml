@@ -39,8 +39,6 @@ jobs:
         id: go
         with:
           go-version: ${{ matrix.go }}
-          cache: true
-          cache-dependency-path: go.sum
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
