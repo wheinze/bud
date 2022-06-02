@@ -2,6 +2,8 @@ module github.com/livebud/bud
 
 go 1.18
 
+replace github.com/livebud/bud => ./
+
 require (
 	github.com/Bowery/prompt v0.0.0-20190916142128-fa8279994f75
 	github.com/PuerkitoBio/goquery v1.8.0
