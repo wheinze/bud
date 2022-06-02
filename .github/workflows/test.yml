@@ -52,7 +52,7 @@ jobs:
       # Temporary fix to get the tests working until we pass the V8 client as a
       # os.Pipe
       - name: Install bud binary into $PATH
-        run: go install github.com/livebud/bud@main
+        run: go install github.com/livebud/bud@${GITHUB_REF#refs/heads/}
 
       - name: Install bud node_modules
         run: npm ci
