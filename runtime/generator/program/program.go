@@ -8,7 +8,7 @@ import (
 	"github.com/livebud/bud/package/di"
 	"github.com/livebud/bud/package/overlay"
 	"github.com/livebud/bud/package/vfs"
-	"github.com/livebud/bud/runtime/bud"
+	"github.com/livebud/bud/runtime/command"
 
 	"github.com/livebud/bud/internal/gotemplate"
 	"github.com/livebud/bud/internal/imports"
@@ -21,7 +21,7 @@ var template string
 var generator = gotemplate.MustParse("program.gotext", template)
 
 type Program struct {
-	Flag     *bud.Flag
+	Flag     *command.Flag
 	Module   *gomod.Module
 	Injector *di.Injector
 }
@@ -64,7 +64,7 @@ func (p *Program) GenerateFile(ctx context.Context, fsys overlay.F, file *overla
 	provider, err := p.Injector.Wire(loadApp)
 	if err != nil {
 		// Don't wrap on purpose, this error gets swallowed up easily
-		return fmt.Errorf("program: unable to wire > %s", err)
+		return fmt.Errorf("program: unable to wire. %s", err)
 	}
 	for _, im := range provider.Imports {
 		imports.AddNamed(im.Name, im.Path)
